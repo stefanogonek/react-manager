@@ -116533,17 +116533,21 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
   var _index2 = _interopRequireDefault(_index);
 
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
   var _jsxFileName = "/Users/steve/projects/nomtek/react/manager/src/components/EmployeeCreate.js";
 
   var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-  var _reactNative = _require(_dependencyMap[2], "react-native");
+  var _reactRedux = _require(_dependencyMap[2], "react-redux");
 
-  var _reactRedux = _require(_dependencyMap[3], "react-redux");
+  var _actions = _require(_dependencyMap[3], "../actions");
 
-  var _actions = _require(_dependencyMap[4], "../actions");
+  var _common = _require(_dependencyMap[4], "./common");
 
-  var _common = _require(_dependencyMap[5], "./common");
+  var _EmployeeForm = _require(_dependencyMap[5], "./EmployeeForm");
+
+  var _EmployeeForm2 = _interopRequireDefault(_EmployeeForm);
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -116597,8 +116601,6 @@ __d(function (global, _require, module, exports, _dependencyMap) {
     }, {
       key: "render",
       value: function render() {
-        var _this2 = this;
-
         return _react3.default.createElement(
           _common.Card,
           {
@@ -116607,155 +116609,18 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               lineNumber: 15
             }
           },
+          _react3.default.createElement(_EmployeeForm2.default, _extends({}, this.props, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 16
+            }
+          })),
           _react3.default.createElement(
             _common.CardSection,
             {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 16
-              }
-            },
-            _react3.default.createElement(_common.Input, {
-              label: "Name",
-              placeholder: "Jane",
-              value: this.props.name,
-              onChangeText: function onChangeText(value) {
-                return _this2.props.employeeUpdate({
-                  prop: 'name',
-                  value: value
-                });
-              },
               __source: {
                 fileName: _jsxFileName,
                 lineNumber: 17
-              }
-            })
-          ),
-          _react3.default.createElement(
-            _common.CardSection,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 25
-              }
-            },
-            _react3.default.createElement(_common.Input, {
-              label: "Phone",
-              placeholder: "555-555-5555",
-              value: this.props.phone,
-              onChangeText: function onChangeText(value) {
-                return _this2.props.employeeUpdate({
-                  prop: 'phone',
-                  value: value
-                });
-              },
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 26
-              }
-            })
-          ),
-          _react3.default.createElement(
-            _common.CardSection,
-            {
-              style: {
-                flexDirection: 'column'
-              },
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 34
-              }
-            },
-            _react3.default.createElement(
-              _reactNative.Text,
-              {
-                style: styles.pickerTextStyle,
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 35
-                }
-              },
-              "Shift"
-            ),
-            _react3.default.createElement(
-              _reactNative.Picker,
-              {
-                selectedValue: this.props.shift,
-                onValueChange: function onValueChange(value) {
-                  return _this2.props.employeeUpdate({
-                    prop: 'shift',
-                    value: value
-                  });
-                },
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 36
-                }
-              },
-              _react3.default.createElement(_reactNative.Picker.Item, {
-                label: "Monday",
-                value: "Monday",
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 40
-                }
-              }),
-              _react3.default.createElement(_reactNative.Picker.Item, {
-                label: "Tuesday",
-                value: "Tuesday",
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 41
-                }
-              }),
-              _react3.default.createElement(_reactNative.Picker.Item, {
-                label: "Wednesday",
-                value: "Wednesday",
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 42
-                }
-              }),
-              _react3.default.createElement(_reactNative.Picker.Item, {
-                label: "Thursday",
-                value: "Thursday",
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 43
-                }
-              }),
-              _react3.default.createElement(_reactNative.Picker.Item, {
-                label: "Friday",
-                value: "Friday",
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 44
-                }
-              }),
-              _react3.default.createElement(_reactNative.Picker.Item, {
-                label: "Saturday",
-                value: "Saturday",
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 45
-                }
-              }),
-              _react3.default.createElement(_reactNative.Picker.Item, {
-                label: "Sunday",
-                value: "Sunday",
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 46
-                }
-              })
-            )
-          ),
-          _react3.default.createElement(
-            _common.CardSection,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 50
               }
             },
             _react3.default.createElement(
@@ -116764,7 +116629,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 onPress: this.onButtonPress.bind(this),
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 51
+                  lineNumber: 18
                 }
               },
               "Create"
@@ -116776,13 +116641,6 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
     return EmployeeCreate;
   }(_react2.Component));
-
-  var styles = {
-    pickerTextStyle: {
-      fontSize: 18,
-      paddingLeft: 20
-    }
-  };
 
   var mapStateToProps = function mapStateToProps(state) {
     var _state$employeeForm = state.employeeForm,
@@ -116797,10 +116655,9 @@ __d(function (global, _require, module, exports, _dependencyMap) {
   };
 
   exports.default = (0, _reactRedux.connect)(mapStateToProps, {
-    employeeUpdate: _actions.employeeUpdate,
     employeeCreate: _actions.employeeCreate
   })(EmployeeCreate);
-},776,[112,131,12,494,764,767],"src/components/EmployeeCreate.js");
+},776,[112,131,494,764,767,778],"src/components/EmployeeCreate.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -116863,7 +116720,9 @@ __d(function (global, _require, module, exports, _dependencyMap) {
     _createClass(ListItem, [{
       key: "onRowPress",
       value: function onRowPress() {
-        _reactNativeRouterFlux.Actions.employeeCreate();
+        _reactNativeRouterFlux.Actions.employeeCreate({
+          employee: this.props.employee
+        });
       }
     }, {
       key: "render",
@@ -116922,5 +116781,252 @@ __d(function (global, _require, module, exports, _dependencyMap) {
   };
   exports.default = ListItem;
 },777,[112,131,12,675,767],"src/components/ListItem.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _react2 = _require(_dependencyMap[0], "react");
+
+  var _react3 = _interopRequireDefault(_react2);
+
+  var _index = _require(_dependencyMap[1], "./../../node_modules/react-transform-hmr/lib/index.js");
+
+  var _index2 = _interopRequireDefault(_index);
+
+  var _jsxFileName = "/Users/steve/projects/nomtek/react/manager/src/components/EmployeeForm.js";
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _reactNative = _require(_dependencyMap[2], "react-native");
+
+  var _reactRedux = _require(_dependencyMap[3], "react-redux");
+
+  var _actions = _require(_dependencyMap[4], "../actions");
+
+  var _common = _require(_dependencyMap[5], "./common");
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+  var _components = {
+    EmployeeForm: {
+      displayName: "EmployeeForm"
+    }
+  };
+
+  var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: "/Users/steve/projects/nomtek/react/manager/src/components/EmployeeForm.js",
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+  });
+
+  function _wrapComponent(id) {
+    return function (Component) {
+      return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
+  }
+
+  var EmployeeForm = _wrapComponent("EmployeeForm")(function (_Component) {
+    _inherits(EmployeeForm, _Component);
+
+    function EmployeeForm() {
+      _classCallCheck(this, EmployeeForm);
+
+      return _possibleConstructorReturn(this, (EmployeeForm.__proto__ || Object.getPrototypeOf(EmployeeForm)).apply(this, arguments));
+    }
+
+    _createClass(EmployeeForm, [{
+      key: "render",
+      value: function render() {
+        var _this2 = this;
+
+        return _react3.default.createElement(
+          _reactNative.View,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 10
+            }
+          },
+          _react3.default.createElement(
+            _common.CardSection,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 11
+              }
+            },
+            _react3.default.createElement(_common.Input, {
+              label: "Name",
+              placeholder: "Jane",
+              value: this.props.name,
+              onChangeText: function onChangeText(value) {
+                return _this2.props.employeeUpdate({
+                  prop: 'name',
+                  value: value
+                });
+              },
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 12
+              }
+            })
+          ),
+          _react3.default.createElement(
+            _common.CardSection,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 20
+              }
+            },
+            _react3.default.createElement(_common.Input, {
+              label: "Phone",
+              placeholder: "555-555-5555",
+              value: this.props.phone,
+              onChangeText: function onChangeText(value) {
+                return _this2.props.employeeUpdate({
+                  prop: 'phone',
+                  value: value
+                });
+              },
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 21
+              }
+            })
+          ),
+          _react3.default.createElement(
+            _common.CardSection,
+            {
+              style: {
+                flexDirection: 'column'
+              },
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 29
+              }
+            },
+            _react3.default.createElement(
+              _reactNative.Text,
+              {
+                style: styles.pickerTextStyle,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 30
+                }
+              },
+              "Shift"
+            ),
+            _react3.default.createElement(
+              _reactNative.Picker,
+              {
+                selectedValue: this.props.shift,
+                onValueChange: function onValueChange(value) {
+                  return _this2.props.employeeUpdate({
+                    prop: 'shift',
+                    value: value
+                  });
+                },
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 31
+                }
+              },
+              _react3.default.createElement(_reactNative.Picker.Item, {
+                label: "Monday",
+                value: "Monday",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 35
+                }
+              }),
+              _react3.default.createElement(_reactNative.Picker.Item, {
+                label: "Tuesday",
+                value: "Tuesday",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 36
+                }
+              }),
+              _react3.default.createElement(_reactNative.Picker.Item, {
+                label: "Wednesday",
+                value: "Wednesday",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 37
+                }
+              }),
+              _react3.default.createElement(_reactNative.Picker.Item, {
+                label: "Thursday",
+                value: "Thursday",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 38
+                }
+              }),
+              _react3.default.createElement(_reactNative.Picker.Item, {
+                label: "Friday",
+                value: "Friday",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 39
+                }
+              }),
+              _react3.default.createElement(_reactNative.Picker.Item, {
+                label: "Saturday",
+                value: "Saturday",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 40
+                }
+              }),
+              _react3.default.createElement(_reactNative.Picker.Item, {
+                label: "Sunday",
+                value: "Sunday",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 41
+                }
+              })
+            )
+          )
+        );
+      }
+    }]);
+
+    return EmployeeForm;
+  }(_react2.Component));
+
+  var styles = {
+    pickerTextStyle: {
+      fontSize: 18,
+      paddingLeft: 20
+    }
+  };
+
+  var mapStateToProps = function mapStateToProps(state) {
+    var _state$employeeForm = state.employeeForm,
+        name = _state$employeeForm.name,
+        phone = _state$employeeForm.phone,
+        shift = _state$employeeForm.shift;
+    return {
+      name: name,
+      phone: phone,
+      shift: shift
+    };
+  };
+
+  exports.default = (0, _reactRedux.connect)(mapStateToProps, {
+    employeeUpdate: _actions.employeeUpdate
+  })(EmployeeForm);
+},778,[112,131,12,494,764,767],"src/components/EmployeeForm.js");
 require(23);
 require(11);//# sourceMappingURL=index.map
