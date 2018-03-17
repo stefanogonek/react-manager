@@ -89367,6 +89367,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
   var EMPLOYEE_UPDATE = exports.EMPLOYEE_UPDATE = 'employee_update';
   var EMPLOYEE_CREATE = exports.EMPLOYEE_CREATE = 'employee_create';
   var EMPLOYEES_FETCH_SUCCESS = exports.EMPLOYEES_FETCH_SUCCESS = 'employees_fetch_success';
+  var EMPLOYEE_SAVE_SUCCESS = exports.EMPLOYEE_SAVE_SUCCESS = 'employee_save_success';
 },671,[],"src/actions/types.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
@@ -89394,6 +89395,9 @@ __d(function (global, _require, module, exports, _dependencyMap) {
         return _extends({}, state, _defineProperty({}, action.payload.prop, action.payload.value));
 
       case _types.EMPLOYEE_CREATE:
+        return INITIAL_STATE;
+
+      case _types.EMPLOYEE_SAVE_SUCCESS:
         return INITIAL_STATE;
 
       default:
@@ -89446,6 +89450,10 @@ __d(function (global, _require, module, exports, _dependencyMap) {
   var _EmployeeCreate = _require(_dependencyMap[4], "./components/EmployeeCreate");
 
   var _EmployeeCreate2 = _interopRequireDefault(_EmployeeCreate);
+
+  var _EmployeeEdit = _require(_dependencyMap[5], "./components/EmployeeEdit");
+
+  var _EmployeeEdit2 = _interopRequireDefault(_EmployeeEdit);
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -89519,6 +89527,15 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               fileName: _jsxFileName,
               lineNumber: 24
             }
+          }),
+          _react2.default.createElement(_reactNativeRouterFlux.Scene, {
+            key: "employeeEdit",
+            component: _EmployeeEdit2.default,
+            title: "Edit Employee",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 25
+            }
           })
         )
       )
@@ -89526,7 +89543,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
   };
 
   exports.default = RouterComponent;
-},674,[112,675,763,774,776],"src/Router.js");
+},674,[112,675,763,774,776,779],"src/Router.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -108728,7 +108745,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.employeesFetch = exports.employeeCreate = exports.employeeUpdate = undefined;
+  exports.employeeSave = exports.employeesFetch = exports.employeeCreate = exports.employeeUpdate = undefined;
 
   var _firebase = _require(_dependencyMap[0], "firebase");
 
@@ -108785,6 +108802,30 @@ __d(function (global, _require, module, exports, _dependencyMap) {
           type: _types.EMPLOYEES_FETCH_SUCCESS,
           payload: snapshot.val()
         });
+      });
+    };
+  };
+
+  var employeeSave = exports.employeeSave = function employeeSave(_ref3) {
+    var name = _ref3.name,
+        phone = _ref3.phone,
+        shift = _ref3.shift,
+        uid = _ref3.uid;
+
+    var _firebase$auth3 = _firebase2.default.auth(),
+        currentUser = _firebase$auth3.currentUser;
+
+    return function (dispatch) {
+      _firebase2.default.database().ref("/users/" + currentUser.uid + "/employees/" + uid).set({
+        name: name,
+        phone: phone,
+        shift: shift
+      }).then(function () {
+        dispatch({
+          type: _types.EMPLOYEE_SAVE_SUCCESS
+        });
+
+        _reactNativeRouterFlux.Actions.pop();
       });
     };
   };
@@ -116720,7 +116761,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
     _createClass(ListItem, [{
       key: "onRowPress",
       value: function onRowPress() {
-        _reactNativeRouterFlux.Actions.employeeCreate({
+        _reactNativeRouterFlux.Actions.employeeEdit({
           employee: this.props.employee
         });
       }
@@ -117028,5 +117069,159 @@ __d(function (global, _require, module, exports, _dependencyMap) {
     employeeUpdate: _actions.employeeUpdate
   })(EmployeeForm);
 },778,[112,131,12,494,764,767],"src/components/EmployeeForm.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _react2 = _require(_dependencyMap[0], "react");
+
+  var _react3 = _interopRequireDefault(_react2);
+
+  var _index = _require(_dependencyMap[1], "./../../node_modules/react-transform-hmr/lib/index.js");
+
+  var _index2 = _interopRequireDefault(_index);
+
+  var _jsxFileName = "/Users/steve/projects/nomtek/react/manager/src/components/EmployeeEdit.js";
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _reactRedux = _require(_dependencyMap[2], "react-redux");
+
+  var _lodash = _require(_dependencyMap[3], "lodash");
+
+  var _lodash2 = _interopRequireDefault(_lodash);
+
+  var _common = _require(_dependencyMap[4], "./common");
+
+  var _actions = _require(_dependencyMap[5], "../actions");
+
+  var _EmployeeForm = _require(_dependencyMap[6], "./EmployeeForm");
+
+  var _EmployeeForm2 = _interopRequireDefault(_EmployeeForm);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+  var _components = {
+    EmployeeEdit: {
+      displayName: "EmployeeEdit"
+    }
+  };
+
+  var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: "/Users/steve/projects/nomtek/react/manager/src/components/EmployeeEdit.js",
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+  });
+
+  function _wrapComponent(id) {
+    return function (Component) {
+      return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+    };
+  }
+
+  var EmployeeEdit = _wrapComponent("EmployeeEdit")(function (_Component) {
+    _inherits(EmployeeEdit, _Component);
+
+    function EmployeeEdit() {
+      _classCallCheck(this, EmployeeEdit);
+
+      return _possibleConstructorReturn(this, (EmployeeEdit.__proto__ || Object.getPrototypeOf(EmployeeEdit)).apply(this, arguments));
+    }
+
+    _createClass(EmployeeEdit, [{
+      key: "componentWillMount",
+      value: function componentWillMount() {
+        var _this2 = this;
+
+        _lodash2.default.each(this.props.employee, function (value, prop) {
+          _this2.props.employeeUpdate({
+            prop: prop,
+            value: value
+          });
+        });
+      }
+    }, {
+      key: "onButtonPress",
+      value: function onButtonPress() {
+        var _props = this.props,
+            name = _props.name,
+            phone = _props.phone,
+            shift = _props.shift;
+        this.props.employeeSave({
+          name: name,
+          phone: phone,
+          shift: shift,
+          uid: this.props.employee.uid
+        });
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        return _react3.default.createElement(
+          _common.Card,
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 22
+            }
+          },
+          _react3.default.createElement(_EmployeeForm2.default, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 23
+            }
+          }),
+          _react3.default.createElement(
+            _common.CardSection,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 24
+              }
+            },
+            _react3.default.createElement(
+              _common.Button,
+              {
+                onPress: this.onButtonPress.bind(this),
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 25
+                }
+              },
+              "Save Changes"
+            )
+          )
+        );
+      }
+    }]);
+
+    return EmployeeEdit;
+  }(_react2.Component));
+
+  var mapStateToProps = function mapStateToProps(state) {
+    var _state$employeeForm = state.employeeForm,
+        name = _state$employeeForm.name,
+        phone = _state$employeeForm.phone,
+        shift = _state$employeeForm.shift;
+    return {
+      name: name,
+      phone: phone,
+      shift: shift
+    };
+  };
+
+  exports.default = (0, _reactRedux.connect)(mapStateToProps, {
+    employeeUpdate: _actions.employeeUpdate,
+    employeeSave: _actions.employeeSave
+  })(EmployeeEdit);
+},779,[112,131,494,775,767,764,778],"src/components/EmployeeEdit.js");
 require(23);
 require(11);//# sourceMappingURL=index.map
